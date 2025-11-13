@@ -397,6 +397,18 @@ export default function HomePage() {
     document.getElementById('scan-section')?.scrollIntoView({ behavior: 'smooth' })
   }
 
+  useEffect(() => {
+    const hash = window.location.hash.slice(1)
+    if (hash) {
+      setTimeout(() => {
+        const element = document.getElementById(hash)
+        if (element) {
+          element.scrollIntoView({ behavior: 'smooth' })
+        }
+      }, 100)
+    }
+  }, [])
+
   return (
     <div className="bg-linear-to-b from-green-50 to-white text-gray-900">
       <div className="h-screen overflow-y-scroll snap-y snap-mandatory scroll-smooth">
