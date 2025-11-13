@@ -1,30 +1,12 @@
 'use client'
 
-import React, { useState } from 'react'
+import React from 'react'
 import Link from 'next/link'
-import { useRouter } from 'next/navigation'
 import Image from 'next/image'
 
-export default function AboutPage() {
-  const router = useRouter()
-  const [showRevertConfirm, setShowRevertConfirm] = useState(false)
-
-  const handleRevert = async () => {
-    try {
-      // Call API to revert the file
-      const response = await fetch('/api/revert-about', { method: 'POST' })
-      if (response.ok) {
-        router.refresh()
-        setShowRevertConfirm(false)
-      }
-    } catch (error) {
-      console.error('Revert failed:', error)
-    }
-  }
-
+export default function AmeriAboutPage() {
   return (
     <div className="min-h-screen bg-white text-gray-900 pt-20">
-      {/* Hero Section */}
       <section className="py-20 px-6 border-b border-green-100">
         <div className="max-w-7xl mx-auto grid md:grid-cols-2 gap-12 items-center">
           <div>
@@ -53,10 +35,8 @@ export default function AboutPage() {
         </div>
       </section>
 
-      {/* Mission Section - Alternating Layout */}
       <section className="py-20 px-6 bg-green-50 border-b border-green-100">
         <div className="max-w-7xl mx-auto grid md:grid-cols-2 gap-12 items-center">
-          {/* Image on left for this section */}
           <div className="relative h-96 rounded-2xl overflow-hidden shadow-lg order-2 md:order-1">
             <Image
               src="https://th.bing.com/th/id/R.708cc3f7c6a3f891ef0a81ef47067dcc?rik=G%2bC1z1BLTm2svQ&pid=ImgRaw&r=0"
@@ -101,7 +81,6 @@ export default function AboutPage() {
         </div>
       </section>
 
-      {/* Inspiration Section - Centered */}
       <section className="py-20 px-6 border-b border-green-100">
         <div className="max-w-4xl mx-auto text-center">
           <h2 className="text-4xl md:text-5xl font-bold text-green-900 mb-8">Our Inspiration</h2>
@@ -128,7 +107,6 @@ export default function AboutPage() {
         </div>
       </section>
 
-      {/* Footer Section */}
       <section className="py-20 px-6 bg-green-900 text-white">
         <div className="max-w-7xl mx-auto">
           <div className="grid md:grid-cols-4 gap-12 mb-12">
@@ -170,41 +148,6 @@ export default function AboutPage() {
           </div>
         </div>
       </section>
-
-      {/* Revert Button */}
-      <div className="fixed bottom-6 right-6">
-        <button
-          onClick={() => setShowRevertConfirm(!showRevertConfirm)}
-          className="px-4 py-2 bg-gray-200 hover:bg-gray-300 text-gray-800 rounded-lg text-sm font-semibold transition-colors"
-          title="Revert to previous About page design"
-        >
-          ↺ Revert
-        </button>
-      </div>
-
-      {/* Revert Confirmation Modal */}
-      {showRevertConfirm && (
-        <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50">
-          <div className="bg-white rounded-xl p-6 max-w-md shadow-xl">
-            <h3 className="text-lg font-bold text-gray-900 mb-2">Revert Design?</h3>
-            <p className="text-gray-600 mb-6">This will restore the previous About page design. This action can be undone.</p>
-            <div className="flex gap-4">
-              <button
-                onClick={() => setShowRevertConfirm(false)}
-                className="flex-1 px-4 py-2 border border-gray-300 rounded-lg text-gray-700 font-semibold hover:bg-gray-50 transition-colors"
-              >
-                Cancel
-              </button>
-              <button
-                onClick={handleRevert}
-                className="flex-1 px-4 py-2 bg-red-600 text-white rounded-lg font-semibold hover:bg-red-700 transition-colors"
-              >
-                Revert
-              </button>
-            </div>
-          </div>
-        </div>
-      )}
     </div>
   )
 }

@@ -1,6 +1,6 @@
 import React from 'react'
 
-const Footer = () => {
+const IronFooter = () => {
   return (
  <footer className="footer sm:footer-horizontal bg-neutral text-neutral-content p-10">
   <nav>
@@ -24,9 +24,7 @@ const Footer = () => {
     <a className="link link-hover">Cookie policy</a>
   </nav>
 </footer>
-
-
   )
 }
 
-export default Footer
+export default IronFooter

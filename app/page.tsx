@@ -2,7 +2,7 @@
 
 import React, { useEffect, useState } from 'react'
 
-function HeroSection({ onLearn, onScan }: { onLearn: () => void; onScan: () => void }) {
+function IronBannerCape({ onLearn, onScan }: { onLearn: () => void; onScan: () => void }) {
   return (
     <section id="hero-section" className="snap-start h-screen relative bg-[url('/hero-bg.jpg')] bg-cover bg-center mt-20">
       <div className="absolute inset-0 bg-linear-to-b from-black/60 to-transparent" />
@@ -35,8 +35,8 @@ function HeroSection({ onLearn, onScan }: { onLearn: () => void; onScan: () => v
   )
 }
 
-function TeachingSection() {
-  const slides = [
+function SpideyTeachCarousel() {
+  const ironSlides = [
     {
       step: 1,
       title: 'Upload or Scan Ingredients',
@@ -63,25 +63,25 @@ function TeachingSection() {
     },
   ]
 
-  const [currentSlide, setCurrentSlide] = useState(0)
+  const [batCurrentSlide, setBatCurrentSlide] = useState(0)
 
   useEffect(() => {
     const timer = setInterval(() => {
-      setCurrentSlide((prev) => (prev + 1) % slides.length)
+      setBatCurrentSlide((prev) => (prev + 1) % ironSlides.length)
     }, 6000)
     return () => clearInterval(timer)
-  }, [slides.length])
+  }, [ironSlides.length])
 
-  const goToSlide = (index: number) => {
-    setCurrentSlide(index)
+  const captainJumpTo = (idx: number) => {
+    setBatCurrentSlide(idx)
   }
 
-  const nextSlide = () => {
-    setCurrentSlide((prev) => (prev + 1) % slides.length)
+  const spideyForward = () => {
+    setBatCurrentSlide((prev) => (prev + 1) % ironSlides.length)
   }
 
-  const prevSlide = () => {
-    setCurrentSlide((prev) => (prev - 1 + slides.length) % slides.length)
+  const batBack = () => {
+    setBatCurrentSlide((prev) => (prev - 1 + ironSlides.length) % ironSlides.length)
   }
 
   return (
@@ -91,23 +91,23 @@ function TeachingSection() {
 
         <div className="relative">
           <div className="bg-white rounded-2xl shadow-lg p-12 min-h-96 flex flex-col justify-center">
-            <div className="text-7xl text-center mb-6">{slides[currentSlide].icon}</div>
+            <div className="text-7xl text-center mb-6">{ironSlides[batCurrentSlide].icon}</div>
             <div className="text-center">
-              <div className="text-green-600 font-bold text-lg mb-2">Step {slides[currentSlide].step} of {slides.length}</div>
-              <h3 className="text-3xl font-bold text-gray-900 mb-4">{slides[currentSlide].title}</h3>
-              <p className="text-lg text-gray-600 max-w-2xl mx-auto">{slides[currentSlide].description}</p>
+              <div className="text-green-600 font-bold text-lg mb-2">Step {ironSlides[batCurrentSlide].step} of {ironSlides.length}</div>
+              <h3 className="text-3xl font-bold text-gray-900 mb-4">{ironSlides[batCurrentSlide].title}</h3>
+              <p className="text-lg text-gray-600 max-w-2xl mx-auto">{ironSlides[batCurrentSlide].description}</p>
             </div>
           </div>
 
           <button
-            onClick={prevSlide}
+            onClick={batBack}
             className="absolute left-0 top-1/2 -translate-y-1/2 -translate-x-16 bg-green-600 text-white rounded-full p-3 hover:bg-green-700 transition-all hidden md:block"
           >
             ←
           </button>
 
           <button
-            onClick={nextSlide}
+            onClick={spideyForward}
             className="absolute right-0 top-1/2 -translate-y-1/2 translate-x-16 bg-green-600 text-white rounded-full p-3 hover:bg-green-700 transition-all hidden md:block"
           >
             →
@@ -115,12 +115,12 @@ function TeachingSection() {
         </div>
 
         <div className="flex items-center justify-center gap-3 mt-8">
-          {slides.map((_, index) => (
+          {ironSlides.map((_, idx) => (
             <button
-              key={index}
-              onClick={() => goToSlide(index)}
+              key={idx}
+              onClick={() => captainJumpTo(idx)}
               className={`w-3 h-3 rounded-full transition-all ${
-                index === currentSlide ? 'bg-green-600 w-8' : 'bg-gray-300 hover:bg-gray-400'
+                idx === batCurrentSlide ? 'bg-green-600 w-8' : 'bg-gray-300 hover:bg-gray-400'
               }`}
             />
           ))}
@@ -128,13 +128,13 @@ function TeachingSection() {
 
         <div className="flex items-center justify-center gap-4 mt-8 md:hidden">
           <button
-            onClick={prevSlide}
+            onClick={batBack}
             className="bg-green-600 text-white px-4 py-2 rounded-full hover:bg-green-700 transition-all"
           >
             ← Previous
           </button>
           <button
-            onClick={nextSlide}
+            onClick={spideyForward}
             className="bg-green-600 text-white px-4 py-2 rounded-full hover:bg-green-700 transition-all"
           >
             Next →
@@ -145,8 +145,8 @@ function TeachingSection() {
   )
 }
 
-function CarouselSection() {
-  const slides = [
+function AmeriCardsShowcase() {
+  const heroSlides = [
     {
       title: 'Instant AI-Powered Insights 🧠',
       description: 'Get comprehensive analysis of any product in seconds. Our AI understands complex ingredient lists and chemical compositions.',
@@ -164,14 +164,14 @@ function CarouselSection() {
     },
   ]
 
-  const [index, setIndex] = useState(0)
+  const [ironIndex, setIronIndex] = useState(0)
 
   useEffect(() => {
     const interval = setInterval(() => {
-      setIndex((prev) => (prev + 1) % slides.length)
+      setIronIndex((prev) => (prev + 1) % heroSlides.length)
     }, 7000)
     return () => clearInterval(interval)
-  }, [slides.length])
+  }, [heroSlides.length])
 
   return (
     <section className="snap-start h-screen bg-linear-to-b from-green-50 to-white flex flex-col items-center justify-center py-12 px-6">
@@ -179,28 +179,28 @@ function CarouselSection() {
         <h2 className="text-4xl font-bold text-center text-gray-900 mb-12">Why IngredientInsight?</h2>
 
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-          {slides.map((slide, i) => (
+          {heroSlides.map((slide, i) => (
             <div
               key={i}
               className={`p-8 rounded-2xl transition-all duration-500 transform ${
-                i === index
+                i === ironIndex
                   ? 'bg-green-600 text-white shadow-xl scale-105'
                   : 'bg-white text-gray-900 shadow-md scale-95 opacity-70'
               }`}
             >
               <div className="text-6xl mb-4">{slide.icon}</div>
               <h3 className="text-2xl font-bold mb-4">{slide.title}</h3>
-              <p className={`text-lg ${i === index ? 'text-green-50' : 'text-gray-600'}`}>{slide.description}</p>
+              <p className={`text-lg ${i === ironIndex ? 'text-green-50' : 'text-gray-600'}`}>{slide.description}</p>
             </div>
           ))}
         </div>
 
         <div className="flex items-center justify-center gap-2 mt-8">
-          {slides.map((_, i) => (
+          {heroSlides.map((_, i) => (
             <button
               key={i}
-              onClick={() => setIndex(i)}
-              className={`w-3 h-3 rounded-full transition-all ${index === i ? 'bg-green-600 w-8' : 'bg-gray-300'}`}
+              onClick={() => setIronIndex(i)}
+              className={`w-3 h-3 rounded-full transition-all ${ironIndex === i ? 'bg-green-600 w-8' : 'bg-gray-300'}`}
             />
           ))}
         </div>
@@ -209,15 +209,15 @@ function CarouselSection() {
   )
 }
 
-function UploadScanSection() {
-  const [filters, setFilters] = useState({
+function CaptainUploadScan() {
+  const [ironFilters, setIronFilters] = useState({
     allergenFree: false,
     vegan: false,
     clean: false,
     eco: false,
   })
   const [allergensExpanded, setAllergensExpanded] = useState(false)
-  const [selectedAllergens, setSelectedAllergens] = useState<Record<string, boolean>>({
+  const [spideyAllergens, setSpideyAllergens] = useState<Record<string, boolean>>({
     nuts: false,
     dairy: false,
     gluten: false,
@@ -226,29 +226,29 @@ function UploadScanSection() {
     eggs: false,
   })
 
-  const toggleAllergenFilter = () => {
-    setFilters((s) => ({ ...s, allergenFree: !s.allergenFree }))
+  const batToggleAllergen = () => {
+    setIronFilters((s) => ({ ...s, allergenFree: !s.allergenFree }))
     setAllergensExpanded((v) => !v)
   }
 
-  const toggleOtherFilter = (key: string) => {
-    setFilters((s) => ({ ...s, [key]: !s[key as keyof typeof s] }))
+  const ameriToggleFilter = (key: string) => {
+    setIronFilters((s) => ({ ...s, [key]: !s[key as keyof typeof s] }))
   }
 
-  const toggleAllergen = (allergen: string) => {
-    setSelectedAllergens((s) => ({ ...s, [allergen]: !s[allergen] }))
+  const spideyToggleItem = (allergen: string) => {
+    setSpideyAllergens((s) => ({ ...s, [allergen]: !s[allergen] }))
   }
 
-  const handleCameraScan = () => {
+  const batCamScan = () => {
     alert('Camera functionality will be available soon!')
   }
 
-  const handleFileUpload = () => {
+  const ironUploadFile = () => {
     const input = document.getElementById('file-input') as HTMLInputElement
     input?.click()
   }
 
-  const handlePasteIngredients = () => {
+  const captainPasteText = () => {
     alert('Paste mode functionality will be available soon!')
   }
 
@@ -267,36 +267,36 @@ function UploadScanSection() {
 
               <div className="space-y-2 mb-6">
                 <button
-                  onClick={toggleAllergenFilter}
+                  onClick={batToggleAllergen}
                   className={`w-full rounded-full px-4 py-2 text-sm font-semibold transition-all ${
-                    filters.allergenFree ? 'bg-green-500 text-white' : 'bg-white text-green-700 border border-green-300'
+                    ironFilters.allergenFree ? 'bg-green-500 text-white' : 'bg-white text-green-700 border border-green-300'
                   } hover:bg-green-400 hover:text-white`}
                 >
                   🚫 Allergen-Free
                 </button>
 
                 <button
-                  onClick={() => toggleOtherFilter('vegan')}
+                  onClick={() => ameriToggleFilter('vegan')}
                   className={`w-full rounded-full px-4 py-2 text-sm font-semibold transition-all ${
-                    filters.vegan ? 'bg-green-500 text-white' : 'bg-white text-green-700 border border-green-300'
+                    ironFilters.vegan ? 'bg-green-500 text-white' : 'bg-white text-green-700 border border-green-300'
                   } hover:bg-green-400 hover:text-white`}
                 >
                   🌿 Vegan
                 </button>
 
                 <button
-                  onClick={() => toggleOtherFilter('clean')}
+                  onClick={() => ameriToggleFilter('clean')}
                   className={`w-full rounded-full px-4 py-2 text-sm font-semibold transition-all ${
-                    filters.clean ? 'bg-green-500 text-white' : 'bg-white text-green-700 border border-green-300'
+                    ironFilters.clean ? 'bg-green-500 text-white' : 'bg-white text-green-700 border border-green-300'
                   } hover:bg-green-400 hover:text-white`}
                 >
                   💧 Clean Ingredients
                 </button>
 
                 <button
-                  onClick={() => toggleOtherFilter('eco')}
+                  onClick={() => ameriToggleFilter('eco')}
                   className={`w-full rounded-full px-4 py-2 text-sm font-semibold transition-all ${
-                    filters.eco ? 'bg-green-500 text-white' : 'bg-white text-green-700 border border-green-300'
+                    ironFilters.eco ? 'bg-green-500 text-white' : 'bg-white text-green-700 border border-green-300'
                   } hover:bg-green-400 hover:text-white`}
                 >
                   ♻️ Sustainable
@@ -311,12 +311,12 @@ function UploadScanSection() {
                 <div className="p-4 bg-white rounded-xl border border-green-200">
                   <p className="font-semibold text-gray-900 mb-3">Allergens to Avoid</p>
                   <div className="space-y-2">
-                    {Object.entries(selectedAllergens).map(([allergen, checked]) => (
+                    {Object.entries(spideyAllergens).map(([allergen, checked]) => (
                       <label key={allergen} className="flex items-center gap-3 cursor-pointer">
                         <input
                           type="checkbox"
                           checked={checked}
-                          onChange={() => toggleAllergen(allergen)}
+                          onChange={() => spideyToggleItem(allergen)}
                           className="w-4 h-4 rounded border-gray-300"
                         />
                         <span className="capitalize text-gray-700 font-medium">{allergen}</span>
@@ -358,21 +358,21 @@ function UploadScanSection() {
 
               <div className="mt-8 grid grid-cols-1 sm:grid-cols-3 gap-4">
                 <button
-                  onClick={handleCameraScan}
+                  onClick={batCamScan}
                   className="flex items-center justify-center gap-2 px-6 py-3 bg-green-600 text-white rounded-full font-semibold hover:bg-green-700 hover:scale-105 transition-all shadow-md"
                 >
                   📸 Camera Scan
                 </button>
 
                 <button
-                  onClick={handleFileUpload}
+                  onClick={ironUploadFile}
                   className="flex items-center justify-center gap-2 px-6 py-3 bg-green-600 text-white rounded-full font-semibold hover:bg-green-700 hover:scale-105 transition-all shadow-md"
                 >
                   📁 File Upload
                 </button>
 
                 <button
-                  onClick={handlePasteIngredients}
+                  onClick={captainPasteText}
                   className="flex items-center justify-center gap-2 px-6 py-3 bg-green-600 text-white rounded-full font-semibold hover:bg-green-700 hover:scale-105 transition-all shadow-md"
                 >
                   ✍️ Paste Ingredients
@@ -388,12 +388,12 @@ function UploadScanSection() {
   )
 }
 
-export default function HomePage() {
-  const scrollToTeachSection = () => {
+export default function IronScanHero() {
+  const spideyLearnNav = () => {
     document.getElementById('teach-section')?.scrollIntoView({ behavior: 'smooth' })
   }
 
-  const scrollToScanSection = () => {
+  const captainScanNav = () => {
     document.getElementById('scan-section')?.scrollIntoView({ behavior: 'smooth' })
   }
 
@@ -401,9 +401,9 @@ export default function HomePage() {
     const hash = window.location.hash.slice(1)
     if (hash) {
       setTimeout(() => {
-        const element = document.getElementById(hash)
-        if (element) {
-          element.scrollIntoView({ behavior: 'smooth' })
+        const el = document.getElementById(hash)
+        if (el) {
+          el.scrollIntoView({ behavior: 'smooth' })
         }
       }, 100)
     }
@@ -412,10 +412,10 @@ export default function HomePage() {
   return (
     <div className="bg-linear-to-b from-green-50 to-white text-gray-900">
       <div className="h-screen overflow-y-scroll snap-y snap-mandatory scroll-smooth">
-        <HeroSection onLearn={scrollToTeachSection} onScan={scrollToScanSection} />
-        <TeachingSection />
-        <CarouselSection />
-        <UploadScanSection />
+        <IronBannerCape onLearn={spideyLearnNav} onScan={captainScanNav} />
+        <SpideyTeachCarousel />
+        <AmeriCardsShowcase />
+        <CaptainUploadScan />
       </div>
     </div>
   )
