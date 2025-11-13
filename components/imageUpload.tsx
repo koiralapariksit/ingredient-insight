@@ -2,46 +2,45 @@
 
 import React, { useState } from 'react'
 
-type HistoryItem = {
+type IronScanRecord = {
   id: string
   product: string
   score: number
   date: string
 }
 
-const sampleFeatured = {
+const spideyFlagged = {
   emoji: '🚫',
   name: 'Sodium Lauryl Sulfate',
   desc: 'A harsh surfactant found in many shampoos — can be irritating for sensitive skin.'
 }
 
-interface ImageUploadProps {
+interface CaptainUploadProps {
   scanSectionRef?: React.RefObject<HTMLDivElement>
 }
 
-const ImageUpload: React.FC<ImageUploadProps> = ({ scanSectionRef }) => {
-  const [mode, setMode] = useState<'camera' | 'upload' | 'paste'>('upload')
-  const [filters, setFilters] = useState<Record<string, boolean>>({
+const BatImageUpload: React.FC<CaptainUploadProps> = ({ scanSectionRef }) => {
+  const [ironMode, setIronMode] = useState<'camera' | 'upload' | 'paste'>('upload')
+  const [spideyFilters, setSpideyFilters] = useState<Record<string, boolean>>({
     allergenFree: false,
     vegan: false,
     clean: false,
     ecoFriendly: false,
   })
-  const [history] = useState<HistoryItem[]>([])
-  const [sidebarOpen, setSidebarOpen] = useState(false)
+  const [ameriHistory] = useState<IronScanRecord[]>([])
+  const [batSidebarState, setBatSidebarState] = useState(false)
 
-  const toggleFilter = (key: string) => {
-    setFilters((prev) => ({ ...prev, [key]: !prev[key] }))
+  const captainToggleFilter = (key: string) => {
+    setSpideyFilters((prev) => ({ ...prev, [key]: !prev[key] }))
   }
 
   return (
     <div id="scan-section" ref={scanSectionRef} className="w-full max-w-6xl px-6 py-12 mx-auto">
-      {/* Tabs with active state */}
       <div className="flex space-x-4 mb-6 border-b border-gray-200">
         <button
-          onClick={() => setMode('camera')}
+          onClick={() => setIronMode('camera')}
           className={`pb-3 px-2 font-medium text-sm transition-all border-b-2 ${
-            mode === 'camera'
+            ironMode === 'camera'
               ? 'border-green-500 text-green-700'
               : 'border-transparent text-gray-600 hover:text-green-600'
           }`}
@@ -50,9 +49,9 @@ const ImageUpload: React.FC<ImageUploadProps> = ({ scanSectionRef }) => {
         </button>
 
         <button
-          onClick={() => setMode('upload')}
+          onClick={() => setIronMode('upload')}
           className={`pb-3 px-2 font-medium text-sm transition-all border-b-2 ${
-            mode === 'upload'
+            ironMode === 'upload'
               ? 'border-green-500 text-green-700'
               : 'border-transparent text-gray-600 hover:text-green-600'
           }`}
@@ -61,9 +60,9 @@ const ImageUpload: React.FC<ImageUploadProps> = ({ scanSectionRef }) => {
         </button>
 
         <button
-          onClick={() => setMode('paste')}
+          onClick={() => setIronMode('paste')}
           className={`pb-3 px-2 font-medium text-sm transition-all border-b-2 ${
-            mode === 'paste'
+            ironMode === 'paste'
               ? 'border-green-500 text-green-700'
               : 'border-transparent text-gray-600 hover:text-green-600'
           }`}
@@ -72,48 +71,45 @@ const ImageUpload: React.FC<ImageUploadProps> = ({ scanSectionRef }) => {
         </button>
       </div>
 
-      {/* Filter Pills */}
       <div className="flex flex-wrap gap-2 mb-6 overflow-x-auto pb-2">
         <button
-          onClick={() => toggleFilter('allergenFree')}
+          onClick={() => captainToggleFilter('allergenFree')}
           className={`rounded-full px-4 py-2 text-sm font-medium transition-all whitespace-nowrap ${
-            filters.allergenFree ? 'bg-green-600 text-white' : 'bg-green-100 text-green-700'
+            spideyFilters.allergenFree ? 'bg-green-600 text-white' : 'bg-green-100 text-green-700'
           }`}
         >
           🚫 Allergen-Free
         </button>
 
         <button
-          onClick={() => toggleFilter('vegan')}
+          onClick={() => captainToggleFilter('vegan')}
           className={`rounded-full px-4 py-2 text-sm font-medium transition-all whitespace-nowrap ${
-            filters.vegan ? 'bg-green-600 text-white' : 'bg-green-100 text-green-700'
+            spideyFilters.vegan ? 'bg-green-600 text-white' : 'bg-green-100 text-green-700'
           }`}
         >
           🌿 Vegan / Animal-Free
         </button>
 
         <button
-          onClick={() => toggleFilter('clean')}
+          onClick={() => captainToggleFilter('clean')}
           className={`rounded-full px-4 py-2 text-sm font-medium transition-all whitespace-nowrap ${
-            filters.clean ? 'bg-green-600 text-white' : 'bg-green-100 text-green-700'
+            spideyFilters.clean ? 'bg-green-600 text-white' : 'bg-green-100 text-green-700'
           }`}
         >
           🧴 Clean / Non-Toxic
         </button>
 
         <button
-          onClick={() => toggleFilter('ecoFriendly')}
+          onClick={() => captainToggleFilter('ecoFriendly')}
           className={`rounded-full px-4 py-2 text-sm font-medium transition-all whitespace-nowrap ${
-            filters.ecoFriendly ? 'bg-green-600 text-white' : 'bg-green-100 text-green-700'
+            spideyFilters.ecoFriendly ? 'bg-green-600 text-white' : 'bg-green-100 text-green-700'
           }`}
         >
           ♻️ Sustainable / Eco-Friendly
         </button>
       </div>
 
-      {/* Upload + History layout */}
       <div className="flex flex-col lg:flex-row gap-6">
-        {/* Left: Upload Zone */}
         <div className="flex-1">
           <div className="rounded-2xl shadow-md bg-white/80 backdrop-blur p-6 mb-6">
             <label
@@ -138,9 +134,9 @@ const ImageUpload: React.FC<ImageUploadProps> = ({ scanSectionRef }) => {
                 </svg>
                 <p className="mb-2 text-sm text-black">
                   <span className="font-semibold">
-                    {mode === 'paste' ? 'Paste ingredients' : 'Click to upload'}
+                    {ironMode === 'paste' ? 'Paste ingredients' : 'Click to upload'}
                   </span>{' '}
-                  {mode === 'camera' ? 'or open camera' : 'or drag and drop'}
+                  {ironMode === 'camera' ? 'or open camera' : 'or drag and drop'}
                 </p>
                 <p className="text-xs text-black">SVG, PNG, JPG or GIF (MAX. 800x400px)</p>
               </div>
@@ -149,27 +145,26 @@ const ImageUpload: React.FC<ImageUploadProps> = ({ scanSectionRef }) => {
           </div>
         </div>
 
-        {/* Right: History Panel */}
         <div className="w-full lg:w-80">
           <div className="flex items-center justify-between mb-3">
             <h4 className="font-semibold text-green-900">History</h4>
             <button
-              onClick={() => setSidebarOpen((s) => !s)}
+              onClick={() => setBatSidebarState((s) => !s)}
               className="text-sm text-green-700 hover:text-green-800"
             >
-              {sidebarOpen ? 'Hide' : 'Top flagged'}
+              {batSidebarState ? 'Hide' : 'Top flagged'}
             </button>
           </div>
 
           <div className="rounded-lg shadow-md border border-gray-200 overflow-hidden">
             <div className="h-64 overflow-auto p-4 bg-white">
-              {history.length === 0 ? (
+              {ameriHistory.length === 0 ? (
                 <div className="text-sm text-gray-600">
                   No previous scans yet — try uploading a product!
                 </div>
               ) : (
                 <ul className="space-y-3">
-                  {history.map((h) => (
+                  {ameriHistory.map((h) => (
                     <li key={h.id} className="flex items-center justify-between border-b pb-2">
                       <div>
                         <div className="font-medium text-gray-900">{h.product}</div>
@@ -185,20 +180,19 @@ const ImageUpload: React.FC<ImageUploadProps> = ({ scanSectionRef }) => {
         </div>
       </div>
 
-      {/* Featured Ingredient Card */}
       <div className="mt-6">
         <div className="rounded-lg shadow-md border p-4 transition-all bg-white">
           <div className="flex items-start justify-between">
             <div>
-              <div className="text-3xl mb-2">{sampleFeatured.emoji}</div>
-              <h5 className="font-bold text-green-900">{sampleFeatured.name}</h5>
-              <p className="text-sm text-gray-700 mt-2">{sampleFeatured.desc}</p>
+              <div className="text-3xl mb-2">{spideyFlagged.emoji}</div>
+              <h5 className="font-bold text-green-900">{spideyFlagged.name}</h5>
+              <p className="text-sm text-gray-700 mt-2">{spideyFlagged.desc}</p>
             </div>
             <button
-              onClick={() => setSidebarOpen((s) => !s)}
+              onClick={() => setBatSidebarState((s) => !s)}
               className="text-sm text-green-700 hover:text-green-800 whitespace-nowrap ml-4"
             >
-              {sidebarOpen ? 'Close' : 'Learn'}
+              {batSidebarState ? 'Close' : 'Learn'}
             </button>
           </div>
         </div>
@@ -207,4 +201,4 @@ const ImageUpload: React.FC<ImageUploadProps> = ({ scanSectionRef }) => {
   )
 }
 
-export default ImageUpload
+export default BatImageUpload
