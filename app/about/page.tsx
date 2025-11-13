@@ -90,13 +90,13 @@ export default function AboutPage() {
           </div>
         </div>
 
-        <div className="mt-16 p-8 rounded-xl bg-white border-2 border-green-300 shadow-md">
+        {/* <div className="mt-16 p-8 rounded-xl bg-white border-2 border-green-300 shadow-md">
           <h2 className="text-2xl font-bold text-green-900 mb-4">Get Started Today</h2>
           <p className="text-gray-700 mb-6">Ready to discover what&apos;s really inside your products? Start your first scan now and join thousands of health-conscious consumers.</p>
-          <Link href="/" className="inline-block px-8 py-3 bg-green-600 text-white rounded-full font-semibold hover:bg-green-700 transition-colors">
+          <Link href="/" className="inline-block px-8 py-3 bg-green-600 text-white rounded-full font-semibold hover:bg-green-700 transition-colors" onClick={() => window.scrollTo(0, 0)}>
             Back to Home
           </Link>
-        </div>
+        </div> */}
       </div>
     </div>
   )
